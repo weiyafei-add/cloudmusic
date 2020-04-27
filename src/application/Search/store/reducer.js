@@ -1,0 +1,23 @@
+import * as actionTypes from './constans'
+import { fromJS } from 'immutable'
+const defaultState = fromJS({
+  hotList: [],
+  suggestList: [],
+  songsList: [],
+  enterLoading: false,
+})
+
+export default (state = defaultState, action) => {
+  switch (action.type) {
+    case actionTypes.SET_ENTER_LOADING:
+      return state.set('enterLoading', action.data)
+    case actionTypes.SET_HOT_KEYWORDS:
+      return state.set('hotList', action.data)
+    case actionTypes.SET_RESULT_SONGS_LIST:
+      return state.set('songsList', action.data)
+    case actionTypes.SET_SUGGEST_LIST:
+      return state.set('suggestList', action.data)
+    default:
+      return state
+  }
+}
