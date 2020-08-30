@@ -6,18 +6,29 @@
     <title>Document</title>
   </head>
   <body>
-    <div>计算随机数</div>
+    <div>
+      <button id="btn">节流处理</button>
+    </div>
   </body>
   <script>
-    var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    function getRandom(min, max) {
-      return Math.floor(Math.random() * (max - min + 1) + min)
+    function getDate() {
+      console.log(new Date())
     }
-    function a() {
-      for (let i = 0; i < 10; i++) {
-        console.log(getRandom(7, 10))
+    function throttle(func, delay) {
+      var run = true
+      return function () {
+        // 函数开头判断run是否为true, 不为true则return
+        if (!run) {
+          return
+        }
+        run = false // 将run置为false, 防止
+        setTimeout(() => {
+          func.apply(this)
+          run = true
+        }, delay)
       }
     }
-    a()
+    var btn = document.getElementById('btn')
+    btn.addEventListener('click', throttle(getDate, 1000))
   </script>
 </html>
